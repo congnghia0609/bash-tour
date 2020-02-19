@@ -150,3 +150,47 @@ done
 # This is line 3
 
 
+
+##################################
+# 4. Functions
+##################################
+
+# Defining functions
+myfunc() {
+    # $1	First argument
+    echo "hello: $1"
+    # $#	Number of arguments
+    echo "Number of arguments: $#"
+    # $*	All arguments
+    echo "All arguments: $*"
+    # $@	All arguments, starting from first
+    echo "All arguments, starting from first: $@"
+}
+myfunc "NghiaTC" 2 true
+# hello: NghiaTC
+# Number of arguments: 3
+# All arguments: NghiaTC 2 true
+# All arguments, starting from first: NghiaTC 2 true
+
+
+# Returning values
+funcReturn() {
+    local myresult='some value'
+    echo $myresult
+}
+result="$(funcReturn)"
+echo $result #=> some value
+
+
+# function check
+funcCheck() {
+  return 0
+}
+if funcCheck; then
+  echo "success"
+else
+  echo "failure"
+fi
+#=> success
+
+
