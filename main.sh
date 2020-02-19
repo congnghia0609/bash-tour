@@ -13,6 +13,10 @@ This is a
 multi line
 comment
 '
+# print
+echo "Hello world!"
+
+
 
 ##################################
 # 2. Basics
@@ -86,5 +90,63 @@ STR="hello world"
 echo ${STR^} #=> Hello world
 # all uppercase
 echo ${STR^^} #=> HELLO WORLD
+
+
+
+##################################
+# 3. Loops
+##################################
+
+# Basic for loop
+for i in `ls -d /usr/*`; do
+  echo $i
+done
+# /usr/bin
+# /usr/games
+# /usr/include
+# /usr/lib
+# /usr/lib32
+# /usr/local
+# /usr/sbin
+# /usr/share
+# /usr/src
+
+# C-like for loop
+for ((i = 0; i < 5; i++)); do
+  echo $i
+done
+# 0
+# 1
+# 2
+# 3
+# 4
+
+# Ranges
+for i in {1..5}; do
+    echo "Welcome $i"
+done
+# Welcome 1
+# Welcome 2
+# Welcome 3
+# Welcome 4
+# Welcome 5
+
+# Ranges with step size 5
+for i in {10..30..5}; do
+    echo "Welcome $i"
+done
+# Welcome 10
+# Welcome 15
+# Welcome 20
+# Welcome 25
+# Welcome 30
+
+# Reading lines
+cat file.txt | while read line; do
+  echo $line
+done
+# This is line 1
+# This is line 2
+# This is line 3
 
 
