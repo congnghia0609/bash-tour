@@ -278,6 +278,52 @@ fi
 
 
 
+##################################
+# 6. Arrays
+##################################
+
+declare -a Fruits
+Fruits[0]="Apple"
+Fruits[1]="Banana"
+Fruits[2]="Orange"
+
+echo ${Fruits[0]}           # Element #0
+#=> Apple
+echo ${Fruits[@]}           # All elements, space-separated
+#=> Apple Banana Orange
+echo ${#Fruits[@]}          # Number of elements
+#=> 3
+echo ${#Fruits}             # String length of the 1st element
+#=> 5
+echo ${#Fruits[3]}          # String length of the Nth element
+#=> 0
+echo ${Fruits[@]:2:1}       # Range (from position 2, length 1)
+#=> Orange
+
+# Arrays Operations
+Fruits=("${Fruits[@]}" "Watermelon")    # Push
+#=> Apple Banana Orange Watermelon
+Fruits+=('Cucumber')                    # Also Push
+#=> Apple Banana Orange Watermelon Cucumber
+Fruits=( ${Fruits[@]/Ap*/} )            # Remove by regex match
+#=> Banana Orange Watermelon Cucumber
+unset Fruits[2]                         # Remove one item
+#=> Banana Orange Cucumber
+FruitsDup=("${Fruits[@]}")              # Duplicate
+#=> Banana Orange Cucumber
+Fruits=("${Fruits[@]}" "${FruitsDup[@]}") # Concatenate
+#=> Banana Orange Cucumber Banana Orange Cucumber
+
+# Iteration
+Fruits=('Apple' 'Banana' 'Orange')
+for i in "${Fruits[@]}"; do
+  echo $i
+done
+# Apple
+# Banana
+# Orange
+
+
 
 
 
