@@ -196,8 +196,88 @@ fi
 
 
 ##################################
-# 4. Functions
+# 5. Conditionals
 ##################################
+
+# String
+[[ -z STRING ]]	# Empty string
+[[ -n STRING ]]	# Not empty string
+[[ STRING == STRING ]] # Equal
+[[ STRING != STRING ]] # Not Equal
+
+if [[ -z "$string" ]]; then
+  echo "String is empty"
+elif [[ -n "$string" ]]; then
+  echo "String is not empty"
+fi
+#=> String is empty
+
+if [[ "$A" == "$B" ]]; then
+  echo "A==B"
+fi
+#=> A==B
+
+
+# Combinations
+[[ ! EXPR ]] # Not
+[[ X ]] && [[ Y ]] # And
+[[ X ]] || [[ Y ]] # Or
+
+if [[ X ]] && [[ Y ]]; then
+  echo "X&&Y=true"
+fi
+#=> X&&Y=true
+
+
+# Comparison
+[[ NUM -eq NUM ]] # Equal
+[[ NUM -ne NUM ]] # Not equal
+[[ NUM -lt NUM ]] # Less than
+[[ NUM -le NUM ]] # Less than or equal
+[[ NUM -gt NUM ]] # Greater than
+[[ NUM -ge NUM ]] # Greater than or equal
+
+if [[ "$A" -eq "$B" ]]; then
+  echo "A==B"
+fi
+#=> A==B
+
+
+# Regex
+if [[ "A" =~ "B" ]]; then
+    echo "A contain B"
+fi
+
+
+# Numeric conditions
+a=1
+b=2
+if (( $a < $b )); then
+   echo "$a is smaller than $b"
+fi
+#=> 1 is smaller than 2
+
+
+# File conditions
+[[ -e FILE ]] # Exists
+[[ -r FILE ]] # Readable
+[[ -h FILE ]] # Symlink
+[[ -d FILE ]] # Directory
+[[ -w FILE ]] # Writable
+[[ -s FILE ]] # Size is > 0 bytes
+[[ -f FILE ]] # File
+[[ -x FILE ]] # Executable
+[[ FILE1 -nt FILE2 ]] # 1 is more recent than 2
+[[ FILE1 -ot FILE2 ]] # 2 is more recent than 1
+[[ FILE1 -ef FILE2 ]] # Same files
+
+if [[ -e "file.txt" ]]; then
+  echo "file exists"
+fi
+#=> file exists
+
+
+
 
 
 
