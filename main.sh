@@ -22,44 +22,44 @@ echo "Hello world!"
 # 2. Basics
 ##################################
 name="NghiaTC"
-echo ${name} #=> NghiaTC
+echo ${name}                #=> NghiaTC
 # slicing index=3, get 2 characters
-echo ${name:3:2} #=> ia
+echo ${name:3:2}            #=> ia
 index=3
 length=2
-echo ${name:index:length} #=> ia
+echo ${name:index:length}   #=> ia
 # slicing from begin index=0, get 2 characters
-echo ${name::2} #=> Ng
+echo ${name::2}             #=> Ng
 # slicing from begin index=0, get (len-1) characters
-echo ${name::-1} #=> NghiaT
+echo ${name::-1}            #=> NghiaT
 # slicing right 
-echo ${name:(-2)} #=> TC
+echo ${name:(-2)}           #=> TC
 # slicing right from index=len-2, get 1 character
-echo ${name:(-2):1} #=> T
+echo ${name:(-2):1}         #=> T
 # substitution replace first match
-echo ${name/N/n} #=> nghiaTC
+echo ${name/N/n}            #=> nghiaTC
 # substitution replace all
 user="nghiaXX"
-echo ${user//X/x} #=> nghiaxx
+echo ${user//X/x}           #=> nghiaxx
 
 
 # substitution
 STR="/path/to/foo.cpp"
 # Remove suffix '.cpp'
-echo ${STR%.cpp} #=> /path/to/foo
-echo ${STR%.cpp}.o #=> /path/to/foo.o
+echo ${STR%.cpp}            #=> /path/to/foo
+echo ${STR%.cpp}.o          #=> /path/to/foo.o
 # Remove long suffix. Get extension.
-echo ${STR##*.} #=> cpp
+echo ${STR##*.}             #=> cpp
 # Remove long prefix. Get filename.
-echo ${STR##*/} #=> foo.cpp
+echo ${STR##*/}             #=> foo.cpp
 # Get file path.
-filename=${STR##*/} #=> foo.cpp
-filedir=${STR%$filename} #=> /path/to/
+filename=${STR##*/}         #=> foo.cpp
+filedir=${STR%$filename}    #=> /path/to/
 echo $filedir
 # Replace prefix
-echo ${STR#*/} #=> path/to/foo.cpp
+echo ${STR#*/}              #=> path/to/foo.cpp
 # Replace first match
-echo ${STR/foo/bar} #=> /path/to/bar.cpp
+echo ${STR/foo/bar}         #=> /path/to/bar.cpp
 
 
 # Length of STR
@@ -68,28 +68,28 @@ echo ${#STR} #=> 16
 
 # Default value:
 # $food1, or val if not set
-echo ${food1} #=> Null value
+echo ${food1}           #=> Null value
 f1=${food1:-Cake}
-echo ${food1} #=> Null value
-echo ${f1} #=> Cake
+echo ${food1}           #=> Null value
+echo ${f1}              #=> Cake
 # Set $food2 to val if not set
-echo ${food2:=Cake} #=> Cake
-echo ${food2} #=> Cake
+echo ${food2:=Cake}     #=> Cake
+echo ${food2}           #=> Cake
 # val if $food3 is set
-echo ${food3:+Cake} #=> Null value
+echo ${food3:+Cake}     #=> Null value
 
 
 # Manipulation
 STR="Hello World"
 # lowercase 1st letter
-echo ${STR,} #=> hello World
+echo ${STR,}        #=> hello World
 # all lowercase
-echo ${STR,,} #=> hello world
+echo ${STR,,}       #=> hello world
 STR="hello world"
 # uppercase 1st letter
-echo ${STR^} #=> Hello world
+echo ${STR^}        #=> Hello world
 # all uppercase
-echo ${STR^^} #=> HELLO WORLD
+echo ${STR^^}       #=> HELLO WORLD
 
 
 
@@ -219,9 +219,9 @@ fi
 
 
 # Combinations
-[[ ! EXPR ]] # Not
-[[ X ]] && [[ Y ]] # And
-[[ X ]] || [[ Y ]] # Or
+[[ ! EXPR ]]        # Not
+[[ X ]] && [[ Y ]]  # And
+[[ X ]] || [[ Y ]]  # Or
 
 if [[ X ]] && [[ Y ]]; then
   echo "X&&Y=true"
@@ -322,6 +322,49 @@ done
 # Apple
 # Banana
 # Orange
+
+
+
+##################################
+# 7. Dictionaries
+##################################
+
+# Defining
+declare -A sounds
+sounds[dog]="bark"
+sounds[cow]="moo"
+sounds[bird]="tweet"
+sounds[wolf]="howl"
+
+echo ${sounds[dog]} # Dog's sound
+#=> bark
+echo ${sounds[@]}   # All values
+#=> bark howl moo tweet
+echo ${!sounds[@]}  # All keys
+#=> dog wolf cow bird
+echo ${#sounds[@]}  # Number of elements
+#=> 4
+unset sounds[dog]   # Delete dog
+#=> wolf cow bird
+
+# Iteration
+for val in "${sounds[@]}"; do
+  echo $val
+done
+# howl
+# moo
+# tweet
+
+for key in "${!sounds[@]}"; do
+  echo "Key=$key, Value=${sounds[$key]}"
+done
+# Key=wolf, Value=howl
+# Key=cow, Value=moo
+# Key=bird, Value=tweet
+
+
+
+
 
 
 
