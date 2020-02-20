@@ -2,7 +2,7 @@
 bash-tour is a cheat sheet, quick reference to learn bash programming  
 
 ## Code quick reference
-Reference code detail in file main.sh  
+Reference code detail in file [main.sh](https://github.com/congnghia0609/bash-tour/blob/master/main.sh)  
 ```bash
 #!/bin/bash
 # The first line of any bash script should be: #!/bin/bash
