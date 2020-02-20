@@ -1,5 +1,5 @@
 #!/bin/bash
-# The first line of any script should be: #!/bin/bash
+# The first line of any bash script should be: #!/bin/bash
 
 # You must make bash scripts executable: sudo chmod +x main.sh
 
@@ -23,11 +23,6 @@ echo "Hello world!"
 ##################################
 name="NghiaTC"
 echo ${name} #=> NghiaTC
-# substitution replace first match
-echo ${name/N/n} #=> nghiaTC
-# substitution replace all
-user="nghiaXX"
-echo ${user//X/x} #=> nghiaxx
 # slicing index=3, get 2 characters
 echo ${name:3:2} #=> ia
 index=3
@@ -41,6 +36,11 @@ echo ${name::-1} #=> NghiaT
 echo ${name:(-2)} #=> TC
 # slicing right from index=len-2, get 1 character
 echo ${name:(-2):1} #=> T
+# substitution replace first match
+echo ${name/N/n} #=> nghiaTC
+# substitution replace all
+user="nghiaXX"
+echo ${user//X/x} #=> nghiaxx
 
 
 # substitution
@@ -54,8 +54,8 @@ echo ${STR##*.} #=> cpp
 echo ${STR##*/} #=> foo.cpp
 # Get file path.
 filename=${STR##*/} #=> foo.cpp
-filepath=${STR%$filename} #=> /path/to/
-echo $filepath
+filedir=${STR%$filename} #=> /path/to/
+echo $filedir
 # Replace prefix
 echo ${STR#*/} #=> path/to/foo.cpp
 # Replace first match
@@ -192,5 +192,12 @@ else
   echo "failure"
 fi
 #=> success
+
+
+
+##################################
+# 4. Functions
+##################################
+
 
 
