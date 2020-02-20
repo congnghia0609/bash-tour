@@ -16,6 +16,15 @@ comment
 # print
 echo "Hello world!"
 
+printf "Hello %s, I'm %s\n" Sven Olga
+#=> "Hello Sven, I'm Olga
+
+printf "1 + 1 = %d\n" 2
+#=> "1 + 1 = 2"
+
+printf "Print a float: %f\n" 2
+#=> "Print a float: 2.000000"
+
 
 
 ##################################
@@ -148,6 +157,20 @@ done
 # This is line 1
 # This is line 2
 # This is line 3
+
+
+# Switch-Case
+case "$1" in
+  start | up)
+    echo "Start server"
+    # do something...
+    ;;
+
+  *) # default
+    echo "Usage: $0 {start|stop|restart|status}"
+    ;;
+esac
+#=> Usage: ./main.sh {start|stop|restart|status}
 
 
 
@@ -364,9 +387,68 @@ done
 
 
 
+##################################
+# 8. Miscellaneous
+##################################
+
+# Numeric calculations
+num=1
+echo $((num + 200))     # Add 200 to $num
+#=> 201
+echo $((RANDOM%=200))   # Random number 0..200
+
+echo "I'm now in $PWD"  # Get current path work directory
+
+
+## Redirection
+: '
+python hello.py > output.txt   # stdout to (file)
+python hello.py >> output.txt  # stdout to (file), append
+python hello.py 2> error.log   # stderr to (file)
+python hello.py 2>&1           # stderr to stdout
+python hello.py 2>/dev/null    # stderr to (null)
+python hello.py &>/dev/null    # stdout and stderr to (null)
+python hello.py < foo.txt      # feed foo.txt to stdin for python
+'
+
+
+# Getting options
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+  -V | --version )
+    echo $version
+    exit
+    ;;
+  -s | --string )
+    shift; string=$1
+    ;;
+  -f | --flag )
+    flag=1
+    ;;
+esac; shift; done
+if [[ "$1" == '--' ]]; then shift; fi
+
+
+# Reading input
+: '
+echo -n "Proceed? [y/n]: "
+read ans
+# read -n 1 ans    # Just one character
+echo $ans
+'
 
 
 
+##################################
+# 9. History
+##################################
+: '
+# Show history commands
+history
+# Show 5 history commands
+history	5
 
+# Execute last command again
+!!
+'
 
 
